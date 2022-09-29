@@ -1,5 +1,19 @@
-// Este es el punto de entrada de tu aplicacion
+import { login } from './templates/login.js';
+import { register } from './templates/register.js';
+import { wall } from './templates/wall.js';
+const routes = {
+  '/': login(),
+  '/login': login(),
+  '/register': register(),
+  '/wall': wall(),
+};
 
-import { myFunction } from './lib/index.js';
+export const onNavigate = (pathname, paramRoutes = routes) => {
+  const rootDiv = document.getElementById('root');
+  rootDiv.replaceChildren(paramRoutes[pathname]);
+};
 
-myFunction();
+window.addEventListener('load', () => {
+  onNavigate(window.location.pathname);
+});
+
